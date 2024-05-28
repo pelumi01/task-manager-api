@@ -1,8 +1,9 @@
 <?php
-namespace App\Services;
+namespace App\Services\Task;
 
 use App\Models\Task;
 use PHPUnit\Exception;
+use function tap;
 
 class TaskService
 {

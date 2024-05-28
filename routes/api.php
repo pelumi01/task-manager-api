@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\PdfController;
 
 
 /*
@@ -27,3 +28,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 |----------------------------------------
 */
 Route::apiResources(['tasks' => TaskController::class]);
+
+
+/*
+|----------------------------------------
+|   Pdf Routes
+|----------------------------------------
+*/
+Route::get('download-task', [PdfController::class, 'download']);

@@ -7,23 +7,31 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            color: #333;
         }
 
         .container {
             width: 60%;
-            margin: 20px auto;
+            margin: 40px auto;
             padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         h1 {
-            text-align: center;
+            margin: 0;
+            font-size: 24px;
             color: #333;
         }
 
@@ -32,48 +40,64 @@
         }
 
         .field {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 15px;
-        }
-
-        .label {
-            font-weight: bold;
-        }
-
-        span {
-            margin-left: 10px;
-            color: #555;
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         label {
-            display: inline-block;
-            width: 120px;
             font-weight: bold;
-            color: #333;
+            color: #555;
+        }
+
+        span {
+            color: #777;
+        }
+
+        @media print {
+            body {
+                background-color: #fff;
+            }
+
+            .container {
+                box-shadow: none;
+                border: none;
+            }
+
+            .field {
+                border-bottom: none;
+            }
         }
 
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Task Details</h1>
+    <div class="header">
+        <h1>Task Details</h1>
+    </div>
+    @foreach( $tasks as $task)
     <div class="task">
         <div class="field">
             <label for="title">Title:</label>
-            <span id="title">[Task Title]</span>
+            <span id="title">{{ $task->title }}</span>
         </div>
         <div class="field">
             <label for="due_date">Due Date:</label>
-            <span id="due_date">[Due Date]</span>
+            <span id="due_date">{{ \Carbon\Carbon::parse($task->due_date)->format('jS F Y') }}</span>
         </div>
         <div class="field">
             <label for="description">Description:</label>
-            <span id="description">[Task Description]</span>
+            <span id="description">{{ $task->description }}</span>
         </div>
         <div class="field">
             <label for="is_completed">Completed:</label>
-            <span id="is_completed">[Yes/No]</span>
+            <span id="is_completed">{{ $task->is_completed == true ? 'Yes' : 'No' }}</span>
         </div>
     </div>
+    @endforeach
 </div>
 </body>
 </html>
