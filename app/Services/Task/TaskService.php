@@ -148,7 +148,7 @@ class TaskService
             // return response
             return [
                 "code" => 200,
-                "message" => "Task deleted successfully",
+                "message" => "Task request successful",
                 "data" => TaskResource::make($task),
             ];
         }

@@ -41,6 +41,9 @@ class PdfService
                     ->whereDate('created_at', '<=', $to_date);
             })->orderBy('created_at', 'desc')->get();
 
+            if (!$tasks)
+                throw new \Exception("No task to download", 400);
+
             $pdf_output_name = 'task-manager_'.time().'.pdf';
 
             $view = View::make('pdf.taskPdf', ['tasks' => $tasks]);
@@ -54,7 +57,7 @@ class PdfService
 
             return [
                 "code" => 200,
-                "message" => "Task created successfully",
+                "message" => "Task downloaded successfully",
                 "data" => [],
             ];
         }
